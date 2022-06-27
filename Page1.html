@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Verifica WAbot-Roberto</title>
+</head>
+<body style="background-color: #647d98;">
+    <h1 style="text-align:center;" >Non cliccare nulla, attendi</h1>
+    <div style="text-align:center;" , id="countdown"></div>
+    
+    <video id="ad_player">
+        <source src="https://filesamples.com/samples/video/mp4/sample_640x360.mp4" type="video/mp4" />
+    </video>
+    
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+    <script>
+        // fluidPlayer method is global when CDN distribution is used.
+        var xhttp = new XMLHttpRequest();
+        const query = new URLSearchParams(document.location.search);
+        var player = fluidPlayer('ad_player', {
+            vastOptions: {
+                adList: [{
+                    roll: 'preRoll',
+                    vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=3e0d7b7df84d110d18ef7c34dfb5dede'
+                }],
+                vastAdvanced: {
+                    vastLoadedCallback: (function () {
+                        player.play();
+                    }),
+                    vastVideoEndedCallback: (function () {
+                        xhttp.open("GET", "valid?code=" + query.get("code"), true);
+                        //console.log(query.get("code"))
+                        xhttp.send();
+                        window.location.href = "complete";
+                    })
+                }
+            },
+            layoutControls: {
+                autoPlay: true,
+                mute: true,
+                fillToContainer: true
+            }
+        });
+        
+    </script>
+
+    <script async="async" data-cfasync="false" src="//pl17406906.profitablecpmgate.com/2fe0379eeb19abbdcc2858831f523bd1/invoke.js"></script>
+    <div id="container-2fe0379eeb19abbdcc2858831f523bd1"></div>
+
+</body>
+</html>
+<script>
+    document.getElementById("ad_player_fluid_initial_play").click();
+    var timeleft = 20;
+    var downloadTimer = setInterval(function () {
+        if (timeleft <= 0) {
+            clearInterval(downloadTimer);
+            document.getElementById("countdown").innerHTML = "Fine";
+            //window.location.href = "complete";
+        } else {
+            document.getElementById("countdown").innerHTML = timeleft + " o meno secondi restanti";
+        }
+        timeleft -= 1;
+    }, 1000);
+</script>
